@@ -1,0 +1,14 @@
+# ABOUTME: Standalone dependencies for eval-runner repo deployed to GitHub.
+# ABOUTME: Minimal set needed by evaluate.py — pycocotools for mAP scoring.
+[project]
+name = "eval-runner"
+version = "0.1.0"
+description = "Hackology II — evaluation runner for scoring submissions"
+requires-python = ">=3.11"
+dependencies = [
+    "pycocotools>=2.0.11",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,42 @@
+name: Evaluate Submission
+
+on:
+  repository_dispatch:
+    types: [evaluate]
+
+concurrency:
+  group: eval
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  statuses: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run evaluation
+        env:
+          TEAM_ID: ${{ github.event.client_payload.team_id }}
+          TEAM_REPO: ${{ github.event.client_payload.team_repo }}
+          SHA: ${{ github.event.client_payload.sha }}
+          PREDICTIONS_PATH: ${{ github.event.client_payload.predictions_path }}
+          GT_PASSPHRASE: ${{ secrets.GT_PASSPHRASE }}
+          GH_TOKEN: ${{ secrets.EVAL_TOKEN }}
+        run: uv run python evaluate.py
+
+      - name: Commit updated scores
+        run: |
+          git config user.name "hackology-bot"
+          git config user.email "bot@hackology.dev"
+          git add scores.json
+          git diff --cached --quiet || git commit -m "score: ${{ github.event.client_payload.team_id }} @ ${{ github.event.client_payload.sha }}"
+          git push

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackology II — Leaderboard</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e1e4ed;
+    --muted: #8b8fa3;
+    --accent: #6c8cff;
+    --gold: #ffd700;
+    --silver: #c0c0c0;
+    --bronze: #cd7f32;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: var(--border);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+  td {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+  }
+  tr:hover td { background: rgba(108, 140, 255, 0.05); }
+  .rank { font-weight: 700; width: 3rem; text-align: center; }
+  .rank-1 { color: var(--gold); }
+  .rank-2 { color: var(--silver); }
+  .rank-3 { color: var(--bronze); }
+  .map-score {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+  .team-name { font-weight: 600; }
+  .meta { color: var(--muted); font-size: 0.85rem; }
+  #status {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<h1>Hackology II</h1>
+<p class="subtitle">Object Detection Challenge — Live Leaderboard</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="rank">Rank</th>
+      <th>Team</th>
+      <th>Best mAP@0.5</th>
+      <th>Submissions</th>
+      <th>Last Submission</th>
+    </tr>
+  </thead>
+  <tbody id="leaderboard">
+    <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+  </tbody>
+</table>
+
+<p id="status"></p>
+
+<script>
+const SCORES_URL = "scores.json";
+const REFRESH_MS = 60000;
+
+function formatTime(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleString("pl-PL", {
+    month: "short", day: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  });
+}
+
+function rankClass(rank) {
+  if (rank <= 3) return "rank-" + rank;
+  return "";
+}
+
+async function fetchAndRender() {
+  try {
+    const resp = await fetch(SCORES_URL + "?t=" + Date.now());
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const data = await resp.json();
+
+    const teams = data.teams || {};
+    const entries = Object.entries(teams)
+      .map(([id, t]) => ({
+        team_id: id,
+        best_map: t.best_map || 0,
+        total_submissions: t.total_submissions || 0,
+        last_submission: (t.submissions && t.submissions.length)
+          ? t.submissions[t.submissions.length - 1].timestamp
+          : null,
+      }))
+      .sort((a, b) => b.best_map - a.best_map);
+
+    const tbody = document.getElementById("leaderboard");
+    if (entries.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No submissions yet</td></tr>';
+    } else {
+      tbody.innerHTML = entries.map((e, i) => {
+        const rank = i + 1;
+        return `<tr>
+          <td class="rank ${rankClass(rank)}">${rank}</td>
+          <td class="team-name">${e.team_id}</td>
+          <td class="map-score">${e.best_map.toFixed(4)}</td>
+          <td class="meta">${e.total_submissions}</td>
+          <td class="meta">${formatTime(e.last_submission)}</td>
+        </tr>`;
+      }).join("");
+    }
+    document.getElementById("status").textContent =
+      "Last updated: " + new Date().toLocaleTimeString("pl-PL");
+  } catch (err) {
+    document.getElementById("status").textContent = "Update failed: " + err.message;
+  }
+}
+
+fetchAndRender();
+setInterval(fetchAndRender, REFRESH_MS);
+</script>
+
+</body>
+</html>
