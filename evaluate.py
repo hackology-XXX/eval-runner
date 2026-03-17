@@ -59,16 +59,13 @@ def _fetch_predictions(team_repo: str, sha: str, predictions_path: str) -> list[
     result = subprocess.run(
         [
             "gh", "api",
-            f"/repos/{team_repo}/contents/{predictions_path}",
+            f"/repos/{team_repo}/contents/{predictions_path}?ref={sha}",
             "-H", "Accept: application/vnd.github.raw+json",
-            "--jq", ".",
             "-X", "GET",
-            "-H", f"X-GitHub-Api-Version: 2022-11-28",
         ],
         capture_output=True,
         text=True,
         check=True,
-        env={**os.environ, "GH_REF": sha},
     )
     return json.loads(result.stdout)
 
