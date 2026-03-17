@@ -133,7 +133,10 @@ def main() -> None:
     # Fetch and validate predictions
     try:
         predictions = _fetch_predictions(team_repo, sha, predictions_path)
-    except (subprocess.CalledProcessError, json.JSONDecodeError) as e:
+    except subprocess.CalledProcessError as e:
+        print(f"ERROR: Failed to fetch predictions: {e}", file=sys.stderr)
+        print(f"STDERR: {e.stderr}", file=sys.stderr)
+        print(f"STDOUT: {e.stdout}", file=sys.stderr)
         record = SubmissionRecord(
             timestamp=now.isoformat(),
             sha=sha,
@@ -144,7 +147,19 @@ def main() -> None:
         record_submission(team_id, scores_data, record)
         save_scores(scores_data, SCORES_PATH)
         _set_commit_status(team_repo, sha, "error", f"Failed to fetch predictions: {e}")
-        print(f"ERROR: Failed to fetch predictions: {e}", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        record = SubmissionRecord(
+            timestamp=now.isoformat(),
+            sha=sha,
+            map_at_05=None,
+            predictions_path=predictions_path,
+            status="error",
+        )
+        record_submission(team_id, scores_data, record)
+        save_scores(scores_data, SCORES_PATH)
+        _set_commit_status(team_repo, sha, "error", f"Failed to parse predictions: {e}")
+        print(f"ERROR: Failed to parse predictions: {e}", file=sys.stderr)
         sys.exit(1)
 
     # Decrypt ground truth and extract valid IDs for validation
