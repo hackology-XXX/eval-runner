@@ -1,58 +1,21 @@
 {
-  "deadline": "2026-04-01T23:59:59+02:00",
+  "deadline": "2026-04-30T23:59:59+02:00",
   "limits": {
     "per_hour": 5,
     "total": 30
   },
   "teams": {
     "team-sim-01": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-02T05:53:31.390023+00:00",
-          "sha": "5ad5d5ea667ccf4caa8b92c9d2e035e45d541862",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        },
-        {
-          "timestamp": "2026-04-02T09:09:40.538836+00:00",
-          "sha": "160d5ee0f0a6ab6735f85da8ec7f86f4df0e8202",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        },
-        {
-          "timestamp": "2026-04-02T09:10:15.723656+00:00",
-          "sha": "ffced62bfbb375b6d5bf0bdeda1de487a743785f",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        }
-      ],
+      "submissions": [],
       "best_map": 0.0,
       "total_scored": 0,
-      "total_submissions": 3
+      "total_submissions": 0
     },
     "team-sim-02": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-02T10:21:51.223651+00:00",
-          "sha": "830934dde723dcecc816299809b5f9e5b57d7042",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        },
-        {
-          "timestamp": "2026-04-02T13:51:39.827135+00:00",
-          "sha": "e739ab5e0f680a772532a95294eef78f30370441",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        }
-      ],
+      "submissions": [],
       "best_map": 0.0,
       "total_scored": 0,
-      "total_submissions": 2
+      "total_submissions": 0
     }
   }
 }
