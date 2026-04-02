@@ -16,6 +16,20 @@
       "best_map": 0.0,
       "total_scored": 0,
       "total_submissions": 0
+    },
+    "cc": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-02T19:02:36.068643+00:00",
+          "sha": "0c2dbd6986c6db68b8fc1b7de4c8830578e382b0",
+          "map_at_05": 0.41914191419141916,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.41914191419141916,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
