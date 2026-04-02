@@ -51,6 +51,20 @@
       "best_map": 0.5653135313531353,
       "total_scored": 4,
       "total_submissions": 4
+    },
+    "team-cx": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-02T21:10:34.395064+00:00",
+          "sha": "1916da9c927ebd888a395fb5d8729defaf5ea3dc",
+          "map_at_05": 0.8813201320132014,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.8813201320132014,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
