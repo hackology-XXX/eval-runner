@@ -32,6 +32,20 @@
       "best_map": 0.0,
       "total_scored": 0,
       "total_submissions": 3
+    },
+    "team-sim-02": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-02T10:21:51.223651+00:00",
+          "sha": "830934dde723dcecc816299809b5f9e5b57d7042",
+          "map_at_05": null,
+          "predictions_path": "submissions/predictions.json",
+          "status": "past_deadline"
+        }
+      ],
+      "best_map": 0.0,
+      "total_scored": 0,
+      "total_submissions": 1
     }
   }
 }
