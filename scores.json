@@ -4,5 +4,20 @@
     "per_hour": 5,
     "total": 30
   },
-  "teams": {}
+  "teams": {
+    "team-sim-01": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-08T05:31:56.741447+00:00",
+          "sha": "78e4fd9f738b70e790a0b7ffa9cf50a1b9c3ae79",
+          "map_at_05": null,
+          "predictions_path": "submissions/predictions.json",
+          "status": "past_deadline"
+        }
+      ],
+      "best_map": 0.0,
+      "total_scored": 0,
+      "total_submissions": 1
+    }
+  }
 }
