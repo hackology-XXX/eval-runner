@@ -60,6 +60,20 @@
       "best_map": 0.5752690892480881,
       "total_scored": 4,
       "total_submissions": 4
+    },
+    "cc": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-08T17:18:28.111815+00:00",
+          "sha": "c59d93085e86b988dfb5f43ef5018a6410a0b1d5",
+          "map_at_05": 0.46322945025521656,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.46322945025521656,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
