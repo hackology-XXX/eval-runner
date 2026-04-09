@@ -95,6 +95,20 @@
       "best_map": 0.6610160073421779,
       "total_scored": 4,
       "total_submissions": 4
+    },
+    "aissecobs-cc2": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-09T07:43:38.989146+00:00",
+          "sha": "de27bd25481d620309c71e6f7cdc7596b5de6f00",
+          "map_at_05": 0.06775024144000925,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.06775024144000925,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
