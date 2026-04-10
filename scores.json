@@ -97,11 +97,18 @@
           "map_at_05": 0.6971160153514057,
           "predictions_path": "submissions/predictions.json",
           "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-10T07:50:40.951484+00:00",
+          "sha": "ee4e71b304bc407af6ada42ab49cd3679e103da1",
+          "map_at_05": 0.7188577285932986,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
         }
       ],
-      "best_map": 0.6971160153514057,
-      "total_scored": 5,
-      "total_submissions": 5
+      "best_map": 0.7188577285932986,
+      "total_scored": 6,
+      "total_submissions": 6
     },
     "aissecobs-cc2": {
       "submissions": [
