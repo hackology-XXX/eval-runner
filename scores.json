@@ -5,181 +5,6 @@
     "total": 30
   },
   "teams": {
-    "team-sim-01": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-08T05:31:56.741447+00:00",
-          "sha": "78e4fd9f738b70e790a0b7ffa9cf50a1b9c3ae79",
-          "map_at_05": null,
-          "predictions_path": "submissions/predictions.json",
-          "status": "past_deadline"
-        },
-        {
-          "timestamp": "2026-04-08T05:36:01.165447+00:00",
-          "sha": "57b0f60543ac632a442b7ce51636064c1eb37f35",
-          "map_at_05": 0.4991443588803325,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        }
-      ],
-      "best_map": 0.4991443588803325,
-      "total_scored": 1,
-      "total_submissions": 2
-    },
-    "aissecobs-cc": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-08T08:33:57.837526+00:00",
-          "sha": "08e5658d1fdf6e9a017b530171e01434aeea160a",
-          "map_at_05": 0.0,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-08T09:51:46.846646+00:00",
-          "sha": "e8aeb51d2b1926354cc1f265722985991e1ff004",
-          "map_at_05": 0.39917891177694254,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-08T15:54:11.270184+00:00",
-          "sha": "1e72b8b1273f69beeb778f820695d855d2a507f8",
-          "map_at_05": 0.5752690892480881,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-08T16:08:55.981607+00:00",
-          "sha": "cd83fe9b2dcd736bc31fa0ecff6f00c1fd0385d9",
-          "map_at_05": 0.5752690892480881,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        }
-      ],
-      "best_map": 0.5752690892480881,
-      "total_scored": 4,
-      "total_submissions": 4
-    },
-    "cc": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-08T17:18:28.111815+00:00",
-          "sha": "c59d93085e86b988dfb5f43ef5018a6410a0b1d5",
-          "map_at_05": 0.46322945025521656,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-08T21:11:19.646507+00:00",
-          "sha": "9642ea18423898d7cbfc20e745292a0a99e522a4",
-          "map_at_05": 0.61799116151627,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-08T21:34:26.010784+00:00",
-          "sha": "e40d6822bb0aef159c6b0eb58aa64abfbff45f0b",
-          "map_at_05": 0.610247206108797,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T03:41:39.793958+00:00",
-          "sha": "d01ddc82ddc5893109b36d80e453781a6c4eb88e",
-          "map_at_05": 0.6610160073421779,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T18:49:54.001166+00:00",
-          "sha": "48318a1f2dd880791b135ef572f90b43a2154b27",
-          "map_at_05": 0.6971160153514057,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-10T07:50:40.951484+00:00",
-          "sha": "ee4e71b304bc407af6ada42ab49cd3679e103da1",
-          "map_at_05": 0.7188577285932986,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-10T20:19:57.503248+00:00",
-          "sha": "5d663b4ea3246242959b1a595532e3a811e8eb20",
-          "map_at_05": 0.7485176459368655,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        }
-      ],
-      "best_map": 0.7485176459368655,
-      "total_scored": 7,
-      "total_submissions": 7
-    },
-    "aissecobs-cc2": {
-      "submissions": [
-        {
-          "timestamp": "2026-04-09T07:43:38.989146+00:00",
-          "sha": "de27bd25481d620309c71e6f7cdc7596b5de6f00",
-          "map_at_05": 0.06775024144000925,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T08:52:50.412350+00:00",
-          "sha": "fbe44821b25f92a774a10f88835d01d476c0aa5d",
-          "map_at_05": 0.3271978292675392,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T09:14:12.359180+00:00",
-          "sha": "f41611a4afe2d8b9a13ca2f533462cc0fd8b33f5",
-          "map_at_05": 0.37998921429310384,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T11:53:06.746735+00:00",
-          "sha": "825105e189cf17e02ef4f0fe024a7a6392324c8b",
-          "map_at_05": 0.5305513026320801,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-09T19:13:34.282969+00:00",
-          "sha": "8a055c637356a0d76371a476827a64381c9597af",
-          "map_at_05": 0.5300503536746431,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-10T06:30:46.893805+00:00",
-          "sha": "af703e5622f008d25e7abe7a70cafefe5ed92722",
-          "map_at_05": 0.5752577078741595,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-10T18:35:02.015006+00:00",
-          "sha": "012a886dc2d1dc18428ba22831a8b850583d2ce3",
-          "map_at_05": 0.69048316886831,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-04-10T19:08:30.583536+00:00",
-          "sha": "f6875a054ec313e97d4c8b0e25ea76bafe5a61fc",
-          "map_at_05": 0.6898826515118877,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        }
-      ],
-      "best_map": 0.69048316886831,
-      "total_scored": 8,
-      "total_submissions": 8
-    },
     "aissecobs-kf": {
       "submissions": [
         {
@@ -270,6 +95,62 @@
       "best_map": 0.7510234545376733,
       "total_scored": 12,
       "total_submissions": 12
+    },
+    "aissecobs-cc": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-08T17:18:28.111815+00:00",
+          "sha": "c59d93085e86b988dfb5f43ef5018a6410a0b1d5",
+          "map_at_05": 0.46322945025521656,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-08T21:11:19.646507+00:00",
+          "sha": "9642ea18423898d7cbfc20e745292a0a99e522a4",
+          "map_at_05": 0.61799116151627,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-08T21:34:26.010784+00:00",
+          "sha": "e40d6822bb0aef159c6b0eb58aa64abfbff45f0b",
+          "map_at_05": 0.610247206108797,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-09T03:41:39.793958+00:00",
+          "sha": "d01ddc82ddc5893109b36d80e453781a6c4eb88e",
+          "map_at_05": 0.6610160073421779,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-09T18:49:54.001166+00:00",
+          "sha": "48318a1f2dd880791b135ef572f90b43a2154b27",
+          "map_at_05": 0.6971160153514057,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-10T07:50:40.951484+00:00",
+          "sha": "ee4e71b304bc407af6ada42ab49cd3679e103da1",
+          "map_at_05": 0.7188577285932986,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        },
+        {
+          "timestamp": "2026-04-10T20:19:57.503248+00:00",
+          "sha": "5d663b4ea3246242959b1a595532e3a811e8eb20",
+          "map_at_05": 0.7485176459368655,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.7485176459368655,
+      "total_scored": 7,
+      "total_submissions": 7
     }
   }
 }
