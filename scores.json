@@ -181,11 +181,18 @@
           "map_at_05": null,
           "predictions_path": "submissions/predictions.json",
           "status": "past_deadline"
+        },
+        {
+          "timestamp": "2026-04-14T09:49:04.388058+00:00",
+          "sha": "1db74d1a7a2d73d8583328928b88c527e7bd8e12",
+          "map_at_05": 0.6706259367599411,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
         }
       ],
       "best_map": 0.7485176459368655,
-      "total_scored": 7,
-      "total_submissions": 10
+      "total_scored": 8,
+      "total_submissions": 11
     }
   }
 }
