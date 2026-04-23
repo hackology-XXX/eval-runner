@@ -375,6 +375,20 @@
       "best_map": 0.7891164106073497,
       "total_scored": 22,
       "total_submissions": 25
+    },
+    "altas": {
+      "submissions": [
+        {
+          "timestamp": "2026-04-23T12:54:10.408305+00:00",
+          "sha": "90b3908a7364e912679386235bcd1b741cd6d583",
+          "map_at_05": 0.0025292130382565895,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.0025292130382565895,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
