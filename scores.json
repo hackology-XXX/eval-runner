@@ -536,6 +536,20 @@
       "best_map": 0.0,
       "total_scored": 1,
       "total_submissions": 1
+    },
+    "pm777": {
+      "submissions": [
+        {
+          "timestamp": "2026-06-01T09:58:37.793413+00:00",
+          "sha": "27215bf9ada533c843fa3f5bf387718648e0bd2c",
+          "map_at_05": 0.0,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.0,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
