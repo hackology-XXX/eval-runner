@@ -522,6 +522,20 @@
       "best_map": 0.07363971319414725,
       "total_scored": 3,
       "total_submissions": 5
+    },
+    "agent-optymista": {
+      "submissions": [
+        {
+          "timestamp": "2026-06-01T09:54:01.366903+00:00",
+          "sha": "4188a308cc506515b927dc2c5ff6585ad454b33e",
+          "map_at_05": 0.0,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
+        }
+      ],
+      "best_map": 0.0,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
