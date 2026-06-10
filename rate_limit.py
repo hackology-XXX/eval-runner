@@ -27,6 +27,7 @@ class SubmissionRecord:
     map_at_05: float | None
     predictions_path: str
     status: str  # "scored" | "rate_limited" | "error" | "past_deadline"
+    ak: float | None = None  # AK quality metric for this submission (None when not scored)
 
 
 def check_rate_limit(team_id: str, scores_data: dict, now: datetime) -> RateLimitCheck:
@@ -47,14 +48,15 @@ def check_rate_limit(team_id: str, scores_data: dict, now: datetime) -> RateLimi
         )
 
     submissions = team.get("submissions", [])
+    scored_subs = [s for s in submissions if s["status"] == "scored"]
     hour_ago = now - timedelta(hours=1)
 
     hourly_count = sum(
         1
-        for s in submissions
+        for s in scored_subs
         if datetime.fromisoformat(s["timestamp"]) > hour_ago
     )
-    total_count = len(submissions)
+    total_count = len(scored_subs)
 
     remaining_hourly = max(0, per_hour - hourly_count)
     remaining_total = max(0, total_limit - total_count)
@@ -105,6 +107,7 @@ def record_submission(
         teams[team_id] = {
             "submissions": [],
             "best_map": 0.0,
+            "best_ak": 0.0,
             "total_scored": 0,
             "total_submissions": 0,
         }
@@ -117,6 +120,10 @@ def record_submission(
         team["total_scored"] += 1
         if record.map_at_05 > team["best_map"]:
             team["best_map"] = record.map_at_05
+            # best_ak tracks the AK of the best-mAP submission (ranking stays mAP).
+            # Explicit None check: a legitimate scored AK of 0.0 must not be confused
+            # with an unscored submission.
+            team["best_ak"] = record.ak if record.ak is not None else 0.0
 
     return scores_data
 
@@ -131,6 +138,7 @@ def scores_to_leaderboard(scores_data: dict) -> list[dict]:
         entries.append({
             "team_id": team_id,
             "best_map": team["best_map"],
+            "best_ak": team.get("best_ak", 0.0),  # backward-compat: old scores.json lacks best_ak
             "total_submissions": team["total_submissions"],
             "last_submission": last_sub,
         })

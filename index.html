@@ -67,6 +67,11 @@
     color: var(--accent);
     font-size: 1.05rem;
   }
+  .ak-score {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
   .team-name { font-weight: 600; }
   .meta { color: var(--muted); font-size: 0.85rem; }
   #status {
@@ -93,12 +98,13 @@
       <th class="rank">Rank</th>
       <th>Team</th>
       <th>Best mAP@0.5</th>
+      <th title="AK (quality metric) of the best-mAP submission. Ranking is by mAP@0.5.">AK</th>
       <th>Submissions</th>
       <th>Last Submission</th>
     </tr>
   </thead>
   <tbody id="leaderboard">
-    <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+    <tr><td colspan="6" class="empty-state">Loading…</td></tr>
   </tbody>
 </table>
 
@@ -106,7 +112,16 @@
 
 <script>
 const SCORES_URL = "scores.json";
+const TEAMS_URL = "teams.json";
 const REFRESH_MS = 60000;
+
+let TEAM_NAMES = {};
+async function loadTeamNames() {
+  try {
+    const resp = await fetch(TEAMS_URL + "?t=" + Date.now());
+    if (resp.ok) TEAM_NAMES = await resp.json();
+  } catch (_) { /* fall back to raw team_id */ }
+}
 
 function formatTime(iso) {
   if (!iso) return "—";
@@ -133,6 +148,7 @@ async function fetchAndRender() {
       .map(([id, t]) => ({
         team_id: id,
         best_map: t.best_map || 0,
+        best_ak: t.best_ak || 0,
         total_submissions: t.total_submissions || 0,
         last_submission: (t.submissions && t.submissions.length)
           ? t.submissions[t.submissions.length - 1].timestamp
@@ -142,14 +158,15 @@ async function fetchAndRender() {
 
     const tbody = document.getElementById("leaderboard");
     if (entries.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No submissions yet</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No submissions yet</td></tr>';
     } else {
       tbody.innerHTML = entries.map((e, i) => {
         const rank = i + 1;
         return `<tr>
           <td class="rank ${rankClass(rank)}">${rank}</td>
-          <td class="team-name">${e.team_id}</td>
+          <td class="team-name">${TEAM_NAMES[e.team_id] ? `${TEAM_NAMES[e.team_id]} (${e.team_id})` : e.team_id}</td>
           <td class="map-score">${e.best_map.toFixed(4)}</td>
+          <td class="ak-score">${e.best_ak.toFixed(4)}</td>
           <td class="meta">${e.total_submissions}</td>
           <td class="meta">${formatTime(e.last_submission)}</td>
         </tr>`;
@@ -162,7 +179,7 @@ async function fetchAndRender() {
   }
 }
 
-fetchAndRender();
+loadTeamNames().then(fetchAndRender);
 setInterval(fetchAndRender, REFRESH_MS);
 </script>
 

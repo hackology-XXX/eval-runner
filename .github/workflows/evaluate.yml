@@ -33,10 +33,15 @@ jobs:
           GH_TOKEN: ${{ secrets.EVAL_TOKEN }}
         run: uv run python evaluate.py
 
-      - name: Commit updated scores
+      - name: Commit and push updated scores
         run: |
           git config user.name "hackology-bot"
           git config user.email "bot@hackology.dev"
           git add scores.json
-          git diff --cached --quiet || git commit -m "score: ${{ github.event.client_payload.team_id }} @ ${{ github.event.client_payload.sha }}"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "score: ${{ github.event.client_payload.team_id }} @ ${{ github.event.client_payload.sha }}"
+          for i in 1 2 3; do
+            git push && break
+            echo "Push attempt $i failed, retrying after pull --rebase..."
+            git pull --rebase
+          done

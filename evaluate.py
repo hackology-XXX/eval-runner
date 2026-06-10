@@ -12,6 +12,7 @@ from pathlib import Path
 
 # These modules are copied into eval-runner at deploy time
 from score import ScoreResult, compute_map
+from ak_score import safe_compute_ak
 from rate_limit import (
     SubmissionRecord,
     check_deadline,
@@ -183,23 +184,30 @@ def main() -> None:
         print(f"Validation failed: {errors_str}", file=sys.stderr)
         sys.exit(1)
 
-    # Score predictions
+    # Score predictions: mAP (ranking metric) + AK (informational quality metric).
+    # AK is best-effort (safe_compute_ak returns None on failure) so it never drops mAP.
     score_result = compute_map(predictions, gt)
+    ak_result = safe_compute_ak(predictions, gt)
 
+    ak_value = ak_result.ak if ak_result is not None else None
     record = SubmissionRecord(
         timestamp=now.isoformat(),
         sha=sha,
         map_at_05=score_result.map_at_05,
         predictions_path=predictions_path,
         status="scored",
+        ak=ak_value,
     )
     record_submission(team_id, scores_data, record)
     save_scores(scores_data, SCORES_PATH)
 
-    desc = f"mAP@0.5: {score_result.map_at_05:.4f}"
+    ak_str = f"{ak_value:.4f}" if ak_value is not None else "n/a"
+    desc = f"mAP@0.5: {score_result.map_at_05:.4f} | AK: {ak_str}"
     _set_commit_status(team_repo, sha, "success", desc)
     print(f"Scored: {desc} (mAP@0.5:0.95: {score_result.map_at_05_095:.4f})")
     print(f"Predictions: {score_result.n_predictions}, GT: {score_result.n_ground_truth}")
+    if ak_result is not None and ak_result.n_skipped_boxes:
+        print(f"AK skipped {ak_result.n_skipped_boxes} degenerate box(es)")
 
 
 if __name__ == "__main__":
