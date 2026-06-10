@@ -610,20 +610,6 @@
     "mir-j1paster": {
       "submissions": [
         {
-          "timestamp": "2026-06-10T07:30:15.234309+00:00",
-          "sha": "649aa1d440756e1e7cd0cdb42e1a7d6b281ad2ae",
-          "map_at_05": 0.9574242997002311,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
-          "timestamp": "2026-06-10T07:42:05.000973+00:00",
-          "sha": "0c04d36ae14ce55c3cefc86772368c605c10dfc2",
-          "map_at_05": 0.666096140032203,
-          "predictions_path": "submissions/predictions.json",
-          "status": "scored"
-        },
-        {
           "timestamp": "2026-06-10T09:04:54.603788+00:00",
           "sha": "f64c12961de90736f77246814e9d47252ee3e82e",
           "map_at_05": 0.7764117951586454,
@@ -631,9 +617,9 @@
           "status": "scored"
         }
       ],
-      "best_map": 0.9574242997002311,
-      "total_scored": 3,
-      "total_submissions": 3
+      "best_map": 0.7764117951586454,
+      "total_scored": 1,
+      "total_submissions": 1
     }
   }
 }
