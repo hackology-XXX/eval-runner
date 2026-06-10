@@ -587,11 +587,18 @@
           "map_at_05": 0.8084844187636433,
           "predictions_path": "submissions/predictions.json",
           "status": "scored"
+        },
+        {
+          "timestamp": "2026-06-10T16:40:34.177770+00:00",
+          "sha": "46c6eb94735760362dc9e51f0f7bf14109a3d041",
+          "map_at_05": 0.7973008910170315,
+          "predictions_path": "submissions/predictions.json",
+          "status": "scored"
         }
       ],
       "best_map": 0.8084844187636433,
-      "total_scored": 9,
-      "total_submissions": 9
+      "total_scored": 10,
+      "total_submissions": 10
     },
     "pm777": {
       "submissions": [
