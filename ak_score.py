@@ -39,6 +39,7 @@ class AKResult:
     n_predictions: int
     n_ground_truth: int  # raw annotation count, includes any degenerate ones in n_skipped_boxes
     n_skipped_boxes: int  # degenerate boxes (w<=0/h<=0, non-finite, malformed) dropped during conversion
+    n_below_threshold: int = 0  # predictions dropped for score < score_threshold
 
 
 def _is_degenerate(bbox: list[float]) -> bool:
@@ -58,7 +59,11 @@ def _is_degenerate(bbox: list[float]) -> bool:
     return w <= 0 or h <= 0
 
 
-def compute_ak(predictions: list[dict], ground_truth_coco: dict) -> AKResult:
+def compute_ak(
+    predictions: list[dict],
+    ground_truth_coco: dict,
+    score_threshold: float = 0.5,
+) -> AKResult:
     """Compute the AK quality metric for COCO predictions against a COCO GT dict.
 
     AK = TP / (TP + FN + FP) per class, weighted-averaged across classes
@@ -66,20 +71,39 @@ def compute_ak(predictions: list[dict], ground_truth_coco: dict) -> AKResult:
     semantics of assecobs_quality_metrics.calculate_ak (default weight mode
     TP_FN_FP, is_extra_pixel_in_iou=True).
 
-    Degenerate boxes (w<=0 or h<=0) are dropped before evaluation — the
-    vendored BoundingBox would otherwise raise ValueError. The count of
-    dropped boxes is returned for transparency.
+    Unlike mAP (which integrates a precision-recall curve), AK counts every
+    prediction as TP/FP with no confidence weighting, so unfiltered
+    over-prediction tanks the score. Predictions with score < score_threshold
+    are therefore dropped first (default 0.5). A prediction with no score field
+    is kept (cannot be thresholded). Set score_threshold=0.0 to disable.
+
+    Degenerate boxes (w<=0 or h<=0, non-finite, malformed) are dropped before
+    evaluation — the vendored BoundingBox would otherwise raise ValueError.
+    Drop counts are returned for transparency.
 
     Args:
         predictions: List of dicts with image_id, category_id, bbox [x,y,w,h], score.
         ground_truth_coco: COCO dict with images, annotations, categories.
+        score_threshold: Minimum prediction score to keep (default 0.5).
 
     Returns:
-        AKResult with the weighted AK, prediction/GT counts, and skip count.
+        AKResult with the weighted AK, prediction/GT counts, and drop counts.
     """
     n_predictions = len(predictions)
     n_ground_truth = len(ground_truth_coco.get("annotations", []))
     skipped = 0
+
+    # Score threshold: drop low-confidence predictions (None score is unthresholdable → kept).
+    below = 0
+    if score_threshold > 0.0:
+        kept = []
+        for p in predictions:
+            s = p.get("score")
+            if s is not None and s < score_threshold:
+                below += 1
+            else:
+                kept.append(p)
+        predictions = kept
 
     # Image universe: every GT image plus any image referenced by predictions.
     image_ids = {img["id"] for img in ground_truth_coco.get("images", [])}
@@ -142,6 +166,7 @@ def compute_ak(predictions: list[dict], ground_truth_coco: dict) -> AKResult:
         n_predictions=n_predictions,
         n_ground_truth=n_ground_truth,
         n_skipped_boxes=skipped,
+        n_below_threshold=below,
     )
 
 
@@ -164,29 +189,36 @@ def safe_compute_ak(predictions: list[dict], ground_truth_coco: dict) -> AKResul
         return None
 
 
-def compute_ak_from_files(predictions_path: Path, gt_path: Path) -> AKResult:
+def compute_ak_from_files(
+    predictions_path: Path, gt_path: Path, score_threshold: float = 0.5
+) -> AKResult:
     """Compute AK from JSON files on disk.
 
     Args:
         predictions_path: Path to predictions JSON (list of dicts).
         gt_path: Path to COCO ground-truth JSON.
+        score_threshold: Minimum prediction score to keep (default 0.5).
     """
     predictions = json.loads(Path(predictions_path).read_text(encoding="utf-8"))
     ground_truth = json.loads(Path(gt_path).read_text(encoding="utf-8"))
-    return compute_ak(predictions, ground_truth)
+    return compute_ak(predictions, ground_truth, score_threshold=score_threshold)
 
 
 def main() -> None:
-    """CLI entry point: score-ak --predictions PATH --gt PATH"""
+    """CLI entry point: score-ak --predictions PATH --gt PATH [--score-threshold T]"""
     parser = argparse.ArgumentParser(description="Compute AK quality metric for COCO predictions")
     parser.add_argument("--predictions", type=Path, required=True, help="Path to predictions JSON")
     parser.add_argument("--gt", type=Path, required=True, help="Path to ground-truth COCO JSON")
+    parser.add_argument("--score-threshold", type=float, default=0.5,
+                        help="Minimum prediction score to keep (default 0.5; 0 disables)")
     args = parser.parse_args()
 
-    result = compute_ak_from_files(args.predictions, args.gt)
-    print(f"AK:           {result.ak:.4f}")
+    result = compute_ak_from_files(args.predictions, args.gt, score_threshold=args.score_threshold)
+    print(f"AK@{args.score_threshold:g}:      {result.ak:.4f}")
     print(f"Predictions:  {result.n_predictions}")
     print(f"Ground truth: {result.n_ground_truth}")
+    if result.n_below_threshold:
+        print(f"Dropped (score < {args.score_threshold:g}): {result.n_below_threshold}")
     if result.n_skipped_boxes:
         print(f"Skipped boxes (degenerate): {result.n_skipped_boxes}")
     sys.exit(0)
