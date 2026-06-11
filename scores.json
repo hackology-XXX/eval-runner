@@ -181,7 +181,7 @@
           "map_at_05": 0.7570964940636489,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.08376339329597955
+          "ak": 0.7188494770350159
         },
         {
           "timestamp": "2026-04-15T11:11:12.987430+00:00",
@@ -194,7 +194,7 @@
       "best_map": 0.7570964940636489,
       "total_scored": 26,
       "total_submissions": 26,
-      "best_ak": 0.08376339329597955
+      "best_ak": 0.7188494770350159
     },
     "aissecobs-cc": {
       "submissions": [
@@ -428,7 +428,7 @@
           "map_at_05": 0.7995375682680707,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.10423447814315699
+          "ak": 0.7735588972431078
         },
         {
           "timestamp": "2026-04-29T05:35:58.523743+00:00",
@@ -455,7 +455,7 @@
       "best_map": 0.7995375682680707,
       "total_scored": 32,
       "total_submissions": 36,
-      "best_ak": 0.10423447814315699
+      "best_ak": 0.7735588972431078
     },
     "altas": {
       "submissions": [
@@ -479,13 +479,13 @@
           "map_at_05": 0.5433285816483671,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.43575995050525884
+          "ak": 0.4414803880219317
         }
       ],
       "best_map": 0.5433285816483671,
       "total_scored": 3,
       "total_submissions": 3,
-      "best_ak": 0.43575995050525884
+      "best_ak": 0.4414803880219317
     },
     "team-a": {
       "submissions": [
@@ -509,7 +509,7 @@
           "map_at_05": 0.07363971319414725,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.07540150621540695
+          "ak": 0.07280760733839209
         },
         {
           "timestamp": "2026-05-22T08:32:25.273783+00:00",
@@ -529,7 +529,7 @@
       "best_map": 0.07363971319414725,
       "total_scored": 3,
       "total_submissions": 5,
-      "best_ak": 0.07540150621540695
+      "best_ak": 0.07280760733839209
     },
     "agent-optymista": {
       "submissions": [
@@ -595,7 +595,7 @@
           "map_at_05": 0.8084844187636433,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.049572883899454565
+          "ak": 0.7770428015564202
         },
         {
           "timestamp": "2026-06-10T16:40:34.177770+00:00",
@@ -616,7 +616,7 @@
       "best_map": 0.8084844187636433,
       "total_scored": 11,
       "total_submissions": 11,
-      "best_ak": 0.049572883899454565
+      "best_ak": 0.7770428015564202
     },
     "pm777": {
       "submissions": [
@@ -670,13 +670,13 @@
           "map_at_05": 0.8121143167363456,
           "predictions_path": "submissions/predictions.json",
           "status": "scored",
-          "ak": 0.19274241522903035
+          "ak": 0.735978419692031
         }
       ],
       "best_map": 0.8121143167363456,
       "total_scored": 5,
       "total_submissions": 5,
-      "best_ak": 0.19274241522903035
+      "best_ak": 0.735978419692031
     }
   }
 }
